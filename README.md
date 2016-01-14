@@ -14,6 +14,7 @@ Well this package should help. Install and call `log.Info("Log all my stuff")` a
 ## Design
 
 All loggers are interfaces and should be declared and used as such. The actual implementations can vary and are easily switched out.
+The main packages should have no external dependencies.
 
 ### Standard
 Standard interface is the same as used by the Go standard library `log` package.
