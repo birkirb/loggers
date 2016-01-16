@@ -2,7 +2,7 @@
 loggers define an abstract and common logging interface in three flavors.
 
 [![GoDoc](https://godoc.org/gopkg.in/birkirb/loggers.v1?status.svg)](https://godoc.org/gopkg.in/birkirb/loggers.v1)
-[![Build Status](https://travis-ci.org/birkirb/loggers.svg?branch=master)](http://travis-ci.org/birkirb/loggers.v1)
+[![Build Status](https://travis-ci.org/birkirb/loggers.svg?branch=master)](http://travis-ci.org/birkirb/loggers)
 
 ## Inspiration
 
@@ -18,9 +18,10 @@ Well this package should help. Install and call `log.Info("Log all my stuff")` a
 
 All loggers are interfaces and should be declared and used as such. The actual implementations can vary and are easily switched out.
 The main packages should have no external dependencies.
+See [here](https://github.com/birkirb/loggers/blob/master/loggers.go).
 
 ### Standard
-Standard interface is the same as used by the Go standard library `log` package.
+Standard interface is the same as used by the Go standard library `log` package. 
 
 ### Advanced
 A common pattern for level discrete loggers using `debug`, `info`, `warn` and `error` levels, along with those defined by the standard interface.
