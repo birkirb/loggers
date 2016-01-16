@@ -1,6 +1,6 @@
 package mappers
 
-import "gopkg.in/birkirb/loggers.v0"
+import "gopkg.in/birkirb/loggers.v1"
 
 type (
 	// Level indicates a specific log level.

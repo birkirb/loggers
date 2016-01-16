@@ -1,6 +1,6 @@
 package mappers
 
-import "gopkg.in/birkirb/loggers.v0"
+import "gopkg.in/birkirb/loggers.v1"
 
 // ContextualMap maps a logger to a contextual logger interface.
 type ContextualMap struct {

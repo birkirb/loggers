@@ -1,8 +1,8 @@
 # loggers : Golang Abstract Loggers
 loggers define an abstract and common logging interface in three flavors.
 
-[![GoDoc](https://godoc.org/gopkg.in/birkirb/loggers.v0?status.svg)](https://godoc.org/gopkg.in/birkirb/loggers.v0)
-[![Build Status](https://travis-ci.org/birkirb/loggers.svg?branch=master)](http://travis-ci.org/birkirb/loggers.v0)
+[![GoDoc](https://godoc.org/gopkg.in/birkirb/loggers.v1?status.svg)](https://godoc.org/gopkg.in/birkirb/loggers.v1)
+[![Build Status](https://travis-ci.org/birkirb/loggers.svg?branch=master)](http://travis-ci.org/birkirb/loggers.v1)
 
 ## Inspiration
 
@@ -30,7 +30,7 @@ A superset of Advanced, adds contextual logging, such that lines can have a numb
 
 ## Installation
 
-    go get gopkg.in/birkirb/loggers.v0
+    go get gopkg.in/birkirb/loggers.v1
 
 ## Usage
 
@@ -39,7 +39,7 @@ You can choose between declaring one of the three interfaces above that best sui
 ### Direct
 
 You can use the loggers interface as a drop in replacement for the standard library logger.
-Just change your import statement from `"log"` to `"gopkg.in/birkirb/loggers.v0/log"`.
+Just change your import statement from `"log"` to `"gopkg.in/birkirb/loggers.v1/log"`.
 It should work just the same and you can make use of advanced and contextual methods only if you so decide.
 You can then easily switch out the log package implementation later with your own logger as long as it implements the Contextual interface.
 
@@ -57,7 +57,7 @@ Declare your own project logging interface.
 	import (
 		"log"
 
-		"gopkg.in/birkirb/loggers.v0"
+		"gopkg.in/birkirb/loggers.v1"
 	)
 
     var Logger loggers.Standard
@@ -75,8 +75,8 @@ Instead of the using the Standard logger as above, we could use the standard log
 
 ```Go
 	import (
-		"gopkg.in/birkirb/loggers.v0"
-		"gopkg.in/birkirb/loggers.v0/mappers/stdlib"
+		"gopkg.in/birkirb/loggers.v1"
+		"gopkg.in/birkirb/loggers.v1/mappers/stdlib"
 	)
 
     var Logger loggers.Advanced
@@ -91,8 +91,8 @@ A level mapper exist to ease with implementing plugins/mappers for other loggers
 
 ## Existing mappers
 
-* [Revel](https://github.com/revel/revel/) mapper ()
-* [Logrus](https://github.com/Sirupsen/logrus) mapper ()
+* [Revel](https://github.com/revel/revel/) [mapper](https://github.com/birkirb/loggers-mapper-revel/)
+* [Logrus](https://github.com/Sirupsen/logrus) [mapper](https://github.com/birkirb/loggers-mapper-logrus/)
 
 # Contributing
 

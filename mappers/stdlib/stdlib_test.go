@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"gopkg.in/birkirb/loggers.v0"
+	"gopkg.in/birkirb/loggers.v1"
 )
 
 func TestLogInterface(t *testing.T) {
