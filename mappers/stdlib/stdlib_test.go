@@ -58,7 +58,7 @@ func TestLogWithFieldsOutput(t *testing.T) {
 	l, b := NewBufferedLog()
 	l.WithFields("test", true).Warn("This is a message.")
 
-	expected := "WARN  This is a message. test=true\n"
+	expected := "WARN  This is a message. [test=true]\n"
 	s := b.String()
 	start := strings.Index(s, "WARN")
 	actual := s[start:]
@@ -71,9 +71,22 @@ func TestLogWithFieldsfOutput(t *testing.T) {
 	l, b := NewBufferedLog()
 	l.WithFields("test", true, "Error", "serious").Errorf("This is a %s.", "message")
 
-	expected := "ERROR This is a message.   test=true Error=serious\n"
+	expected := "ERROR This is a message. [test=true, Error=serious]\n"
 	s := b.String()
 	start := strings.Index(s, "ERROR")
+	actual := s[start:]
+	if actual != expected {
+		t.Errorf("Log output mismatch %s (actual) != %s (expected)", actual, expected)
+	}
+}
+
+func TestLogWithFieldsLnOutput(t *testing.T) {
+	l, b := NewBufferedLog()
+	l.WithFields("test", true, "Error", "not so serious").Warnln("This is your last.")
+
+	expected := "WARN   This is your last. [test=true, Error=not so serious]\n"
+	s := b.String()
+	start := strings.Index(s, "WARN")
 	actual := s[start:]
 	if actual != expected {
 		t.Errorf("Log output mismatch %s (actual) != %s (expected)", actual, expected)

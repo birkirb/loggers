@@ -56,14 +56,14 @@ func (l *goTestLog) WithField(key string, value interface{}) loggers.Advanced {
 
 // WithFields returns an advanced logger with pre-set fields.
 func (l *goTestLog) WithFields(fields ...interface{}) loggers.Advanced {
-	s := make([]string, len(fields)/2)
+	s := make([]string, 0, len(fields)/2)
 	for i := 0; i+1 < len(fields); i = i + 2 {
 		key := fields[i]
 		value := fields[i+1]
 		s = append(s, fmt.Sprint(key, "=", value))
 	}
 
-	r := goTestLogPostfixLogger{l, strings.Join(s, " ")}
+	r := goTestLogPostfixLogger{l, "["+strings.Join(s, ", ")+"]"}
 	return mappers.NewAdvancedMap(&r)
 }
 
@@ -73,7 +73,9 @@ type goTestLogPostfixLogger struct {
 }
 
 func (r *goTestLogPostfixLogger) LevelPrint(lev mappers.Level, i ...interface{}) {
-	i = append(i, r.postfix)
+	if len(r.postfix) > 0 {
+		i = append(i, " ", r.postfix)
+	}
 	r.goTestLog.LevelPrint(lev, i...)
 }
 
