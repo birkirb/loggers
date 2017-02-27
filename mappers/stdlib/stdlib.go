@@ -19,7 +19,7 @@ type goLog struct {
 // NewDefaultLogger returns a Contextual logger using a log.Logger with stderr output.
 func NewDefaultLogger() loggers.Contextual {
 	var g goLog
-	g.logger = log.New(os.Stderr, "", log.Ldate|log.Ltime)
+	g.logger = log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
 	a := mappers.NewContextualMap(&g)
 	a.Debug("Now using Go's stdlib log package (via loggers/mappers/stdlib).")
