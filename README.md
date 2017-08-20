@@ -55,18 +55,18 @@ You can then easily switch out the log package implementation later with your ow
 Declare your own project logging interface.
 
 ```Go
-	import (
-		"log"
+import (
+    "log"
 
-		"gopkg.in/birkirb/loggers.v1"
-	)
+    "gopkg.in/birkirb/loggers.v1"
+)
 
-    var Logger loggers.Standard
+var Logger loggers.Standard
 
-    func init() {
-        Logger = log.New(writer, "myapp", log.LstdFlags)
-        Logger.Println("Logger is started")
-    }
+func init() {
+    Logger = log.New(writer, "myapp", log.LstdFlags)
+    Logger.Println("Logger is started")
+}
 ```
 
 ### Mappers
@@ -75,17 +75,17 @@ A few loggers have been mapped to the above interfaces and could thus be used wi
 Instead of the using the Standard logger as above, we could use the standard logger much like a leveled logger.
 
 ```Go
-	import (
-		"gopkg.in/birkirb/loggers.v1"
-		"gopkg.in/birkirb/loggers.v1/mappers/stdlib"
-	)
+import (
+    "gopkg.in/birkirb/loggers.v1"
+    "gopkg.in/birkirb/loggers.v1/mappers/stdlib"
+)
 
-    var Logger loggers.Advanced
+var Logger loggers.Advanced
 
-    func init() {
-        Logger = stdlib.NewDefaultLogger()
-        Logger.Info("Logger is started")
-    }
+func init() {
+    Logger = stdlib.NewDefaultLogger()
+    Logger.Info("Logger is started")
+}
 ```
 
 A level mapper exist to ease with implementing plugins/mappers for other loggers that don't naturally implement any of the designed interfaces. This can be found in the mappers package.
