@@ -118,11 +118,11 @@ func Println(v ...interface{}) {
 }
 
 // WithField adds the key value as parameter to log.
-func WithField(key string, value interface{}) loggers.Advanced {
+func WithField(key string, value interface{}) loggers.Contextual {
 	return Logger.WithField(key, value)
 }
 
 // WithFields adds the fields as a list of key/value parameters to log. Even number expected.
-func WithFields(fields ...interface{}) loggers.Advanced {
+func WithFields(fields ...interface{}) loggers.Contextual {
 	return Logger.WithFields(fields...)
 }
