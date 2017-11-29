@@ -1,6 +1,6 @@
 package mappers
 
-import "gopkg.in/birkirb/loggers.v1"
+import "github.com/marcaudefroy/loggers"
 
 // ContextualMap maps a logger to a contextual logger interface.
 type ContextualMap struct {
@@ -23,11 +23,11 @@ func NewContextualMap(m ContextualMapper) *ContextualMap {
 }
 
 // WithField directly maps the loggers method.
-func (c *ContextualMap) WithField(key string, value interface{}) loggers.Advanced {
+func (c *ContextualMap) WithField(key string, value interface{}) loggers.Contextual {
 	return c.ContextualMapper.WithField(key, value)
 }
 
 // WithFields directly maps the loggers method.
-func (c *ContextualMap) WithFields(fields ...interface{}) loggers.Advanced {
+func (c *ContextualMap) WithFields(fields ...interface{}) loggers.Contextual {
 	return c.ContextualMapper.WithFields(fields...)
 }

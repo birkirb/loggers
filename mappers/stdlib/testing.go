@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"gopkg.in/birkirb/loggers.v1"
-	"gopkg.in/birkirb/loggers.v1/mappers"
+	"github.com/marcaudefroy/loggers"
+	"github.com/marcaudefroy/loggers/mappers"
 )
 
 // goTestLog maps the testing logger to an Advanced log interface.
@@ -50,12 +50,12 @@ func (l *goTestLog) LevelPrintln(lev mappers.Level, i ...interface{}) {
 }
 
 // WithField returns an advanced logger with a pre-set field.
-func (l *goTestLog) WithField(key string, value interface{}) loggers.Advanced {
+func (l *goTestLog) WithField(key string, value interface{}) loggers.Contextual {
 	return l.WithFields(key, value)
 }
 
 // WithFields returns an advanced logger with pre-set fields.
-func (l *goTestLog) WithFields(fields ...interface{}) loggers.Advanced {
+func (l *goTestLog) WithFields(fields ...interface{}) loggers.Contextual {
 	s := make([]string, 0, len(fields)/2)
 	for i := 0; i+1 < len(fields); i = i + 2 {
 		key := fields[i]
@@ -63,8 +63,8 @@ func (l *goTestLog) WithFields(fields ...interface{}) loggers.Advanced {
 		s = append(s, fmt.Sprint(key, "=", value))
 	}
 
-	r := goTestLogPostfixLogger{l, "["+strings.Join(s, ", ")+"]"}
-	return mappers.NewAdvancedMap(&r)
+	r := goTestLogPostfixLogger{l, "[" + strings.Join(s, ", ") + "]"}
+	return mappers.NewContextualMap(&r)
 }
 
 type goTestLogPostfixLogger struct {

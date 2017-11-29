@@ -41,6 +41,6 @@ type Advanced interface {
 type Contextual interface {
 	Advanced
 
-	WithField(key string, value interface{}) Advanced
-	WithFields(fields ...interface{}) Advanced
+	WithField(key string, value interface{}) Contextual
+	WithFields(fields ...interface{}) Contextual
 }

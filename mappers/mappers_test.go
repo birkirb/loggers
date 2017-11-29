@@ -3,7 +3,7 @@ package mappers
 import (
 	"testing"
 
-	"gopkg.in/birkirb/loggers.v1"
+	"github.com/marcaudefroy/loggers"
 )
 
 func TestInterface(t *testing.T) {

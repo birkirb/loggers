@@ -1,8 +1,8 @@
 package log
 
 import (
-	"gopkg.in/birkirb/loggers.v1"
-	"gopkg.in/birkirb/loggers.v1/mappers/stdlib"
+	"github.com/marcaudefroy/loggers"
+	"github.com/marcaudefroy/loggers/mappers/stdlib"
 )
 
 // Logger is an Contextual logger interface.

@@ -1,6 +1,6 @@
 package mappers
 
-import "gopkg.in/birkirb/loggers.v1"
+import "github.com/marcaudefroy/loggers"
 
 type (
 	// Level indicates a specific log level.
@@ -16,8 +16,8 @@ type (
 	// ContextualMapper interfaces allows a logger to map to any Contextual Logger.
 	ContextualMapper interface {
 		LevelMapper
-		WithField(key string, value interface{}) loggers.Advanced
-		WithFields(fields ...interface{}) loggers.Advanced
+		WithField(key string, value interface{}) loggers.Contextual
+		WithFields(fields ...interface{}) loggers.Contextual
 	}
 )
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"gopkg.in/birkirb/loggers.v1"
+	"github.com/marcaudefroy/loggers"
 )
 
 func TestLogInterface(t *testing.T) {
@@ -70,6 +70,19 @@ func TestLogWithFieldsOutput(t *testing.T) {
 func TestLogWithFieldsfOutput(t *testing.T) {
 	l, b := NewBufferedLog()
 	l.WithFields("test", true, "Error", "serious").Errorf("This is a %s.", "message")
+
+	expected := "ERROR This is a message. [test=true, Error=serious]\n"
+	s := b.String()
+	start := strings.Index(s, "ERROR")
+	actual := s[start:]
+	if actual != expected {
+		t.Errorf("Log output mismatch %s (actual) != %s (expected)", actual, expected)
+	}
+}
+
+func TestLogChainedWithFieldsfOutput(t *testing.T) {
+	l, b := NewBufferedLog()
+	l.WithFields("test", "true").WithFields("Error", "serious").Errorf("This is a %s.", "message")
 
 	expected := "ERROR This is a message. [test=true, Error=serious]\n"
 	s := b.String()
