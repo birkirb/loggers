@@ -22,7 +22,6 @@ func NewDefaultLogger() loggers.Contextual {
 	g.logger = log.New(os.Stderr, "", log.Ldate|log.Ltime)
 
 	a := mappers.NewContextualMap(&g)
-	a.Debug("Now using Go's stdlib log package (via loggers/mappers/stdlib).")
 
 	return a
 }
@@ -33,7 +32,6 @@ func NewLogger(l *log.Logger) loggers.Contextual {
 	g.logger = l
 
 	a := mappers.NewContextualMap(&g)
-	a.Debug("Now using Go's stdlib log package (via loggers/mappers/stdlib).")
 
 	return a
 }
