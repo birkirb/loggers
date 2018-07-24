@@ -1,2 +1,24 @@
 language: go
-go: 1.4
+
+sudo: false
+
+os:
+  - linux
+  - osx
+
+go:
+  - 1.9.x
+  - 1.10.x
+  - master
+
+install:
+  - mkdir -p $GOPATH/src/gopkg.in/birkirb/loggers.v1
+  - cp -r $GOPATH/src/github.com/birkirb/loggers/* $GOPATH/src/gopkg.in/birkirb/loggers.v1/
+
+script:
+  - go test -v ./...
+
+matrix:
+  allow_failures:
+    - go: 'master'
+  fast_finish: true
