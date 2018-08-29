@@ -1,5 +1,11 @@
 package mappers
 
+// TestHelper describes a *testing.T helper.
+// See: https://golang.org/pkg/testing/#T.Helper
+type TestHelper interface {
+	Helper()
+}
+
 // AdvancedMap maps a standard logger to an advanced logger interface.
 type AdvancedMap struct {
 	standardMap
@@ -17,13 +23,10 @@ func NewAdvancedMap(m LevelMapper) *AdvancedMap {
 	return &a
 }
 
-// TestHelper describes a *testing.T helper.
-type TestHelper interface {
-	Helper()
-}
-
 // NewAdvancedMapTesting returns an advanced logger that is mapped via mapper.
-// A TestHelper can be passed. This will be called if not nil.
+// A TestHelper can be passed that will then be invoked (when not nil) on each
+// log statement marking that function call as a test helper call and causing
+// file/line information to be skipped.
 func NewAdvancedMapTesting(m LevelMapper, t TestHelper) *AdvancedMap {
 	var a AdvancedMap
 
