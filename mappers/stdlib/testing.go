@@ -18,17 +18,19 @@ type goTestLog struct {
 // NewDefaultLogger returns a Contextual logger using a *testing.T with Log/Logf output.
 // This allows logging to be redirected to the test where it belongs.
 func NewTestingLogger(t *testing.T) loggers.Contextual {
+	t.Helper()
 	var g goTestLog
 	g.logger = t
 
-	a := mappers.NewContextualMap(&g)
-	a.Debug("Now using Go's stdlib testing log (via loggers/mappers/stdlib).")
+	a := mappers.NewContextualMapTesting(&g, t)
+	a.Debugf("Now using Go's stdlib testing log (via loggers/mappers/stdlib).")
 
 	return a
 }
 
 // LevelPrint is a Mapper method
 func (l *goTestLog) LevelPrint(lev mappers.Level, i ...interface{}) {
+	l.logger.Helper()
 	v := []interface{}{lev}
 	v = append(v, i...)
 	l.logger.Log(v...)
@@ -36,6 +38,7 @@ func (l *goTestLog) LevelPrint(lev mappers.Level, i ...interface{}) {
 
 // LevelPrintf is a Mapper method
 func (l *goTestLog) LevelPrintf(lev mappers.Level, format string, i ...interface{}) {
+	l.logger.Helper()
 	f := "%s" + format
 	v := []interface{}{lev}
 	v = append(v, i...)
@@ -44,6 +47,7 @@ func (l *goTestLog) LevelPrintf(lev mappers.Level, format string, i ...interface
 
 // LevelPrintln is a Mapper method
 func (l *goTestLog) LevelPrintln(lev mappers.Level, i ...interface{}) {
+	l.logger.Helper()
 	v := []interface{}{lev}
 	v = append(v, i...)
 	l.logger.Log(v...)
@@ -64,7 +68,7 @@ func (l *goTestLog) WithFields(fields ...interface{}) loggers.Advanced {
 	}
 
 	r := goTestLogPostfixLogger{l, "["+strings.Join(s, ", ")+"]"}
-	return mappers.NewAdvancedMap(&r)
+	return mappers.NewAdvancedMapTesting(&r, l.logger)
 }
 
 type goTestLogPostfixLogger struct {
@@ -73,6 +77,7 @@ type goTestLogPostfixLogger struct {
 }
 
 func (r *goTestLogPostfixLogger) LevelPrint(lev mappers.Level, i ...interface{}) {
+	r.logger.Helper()
 	if len(r.postfix) > 0 {
 		i = append(i, " ", r.postfix)
 	}
@@ -80,6 +85,7 @@ func (r *goTestLogPostfixLogger) LevelPrint(lev mappers.Level, i ...interface{})
 }
 
 func (r *goTestLogPostfixLogger) LevelPrintf(lev mappers.Level, format string, i ...interface{}) {
+	r.logger.Helper()
 	if len(r.postfix) > 0 {
 		format = format + " %s"
 		i = append(i, r.postfix)
@@ -88,6 +94,7 @@ func (r *goTestLogPostfixLogger) LevelPrintf(lev mappers.Level, format string, i
 }
 
 func (r *goTestLogPostfixLogger) LevelPrintln(lev mappers.Level, i ...interface{}) {
+	r.logger.Helper()
 	i = append(i, r.postfix)
 	r.goTestLog.LevelPrintln(lev, i...)
 }

@@ -22,6 +22,24 @@ func NewContextualMap(m ContextualMapper) *ContextualMap {
 	return &a
 }
 
+// NewContextualMapTesting returns an contextual logger that is mapped via mapper.
+// A TestHelper can be passed that will then be invoked (when not nil) on each
+// log statement marking that function call as a test helper call and causing
+// file/line information to be skipped.
+func NewContextualMapTesting(m ContextualMapper, t TestHelper) *ContextualMap {
+	var a ContextualMap
+	a.t = t
+
+	if m != nil {
+		if am := NewAdvancedMapTesting(m, t); am != nil {
+			a.AdvancedMap = *am
+		}
+		a.ContextualMapper = m
+	}
+
+	return &a
+}
+
 // WithField directly maps the loggers method.
 func (c *ContextualMap) WithField(key string, value interface{}) loggers.Advanced {
 	return c.ContextualMapper.WithField(key, value)
