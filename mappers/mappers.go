@@ -18,6 +18,7 @@ type (
 		LevelMapper
 		WithField(key string, value interface{}) loggers.Contextual
 		WithFields(fields ...interface{}) loggers.Contextual
+		Fields() []interface{}
 	}
 )
 

@@ -78,8 +78,16 @@ func (l *goLog) WithFields(fields ...interface{}) loggers.Contextual {
 	return mappers.NewContextualMap(&r)
 }
 
+func (l *goLog) Fields() []interface{} {
+	return l.fields
+}
+
 type gologPostfixLogger struct {
 	*goLog
+}
+
+func (r *gologPostfixLogger) Fields() []interface{} {
+	return r.fields
 }
 
 func (r *gologPostfixLogger) postfixFromFields() string {

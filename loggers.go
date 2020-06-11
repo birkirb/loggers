@@ -43,4 +43,5 @@ type Contextual interface {
 
 	WithField(key string, value interface{}) Contextual
 	WithFields(fields ...interface{}) Contextual
+	Fields() []interface{}
 }
